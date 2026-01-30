@@ -11,7 +11,7 @@ PREPROC = $(SRC:.asm=.i)
 
 all: $(TARGET)
 
-$(OBJ): $(SRC)
+$(OBJ): $(SRC) makefile
 	$(ASM) $(ASMFLAGS) $< -o $@ -l $(LST)
 
 $(TARGET): $(OBJ)
