@@ -3,25 +3,25 @@ LD      = ld
 ASMFLAGS= -f elf32
 LDFLAGS = -m elf_i386
 
-TARGET  = hello-world
+EXE     = hello-world
 SRC     = hello-world.asm
 OBJ     = $(SRC:.asm=.o)
 LST     = $(SRC:.asm=.lst)
 PREPROC = $(SRC:.asm=.i)
 
-all: $(TARGET)
+all: $(EXE)
 
 $(OBJ): $(SRC) makefile
 	$(ASM) $(ASMFLAGS) $< -o $@ -l $(LST)
 
-$(TARGET): $(OBJ)
+$(EXE): $(OBJ)
 	$(LD) $(LDFLAGS) $< -o $@
 
 preproc: $(SRC)
-	$(NASM) -E $< > $(PREPROC)
+	$(ASM) -E $< > $(PREPROC)
 
-run: $(TARGET)
-	./$(TARGET)
+run: $(EXE)
+	./$(EXE)
 
 clean:
-	rm -f $(OBJ) $(TARGET)
+	rm -f $(OBJ) $(EXE) $(LST) $(PREPROC)
